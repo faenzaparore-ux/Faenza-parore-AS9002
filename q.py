@@ -1,0 +1,140 @@
+name = input("What is your name? ")
+
+print("Hello", name)
+print("Welcome to my quiz game!")
+print("Now let's get started!")
+
+questions = (
+    "Who won the football World Cup in 2026?: ",
+    "What is the most dangerous snake in the world?: ",
+    "What is the most points you can score with one normal basketball shot?: ",
+    "What is the longest river in the world?: ",
+    "What planet is known as the Red Planet?: ",
+    "How many players are on a football team on the field?: ",
+    "What is the largest animal in the world?: ",
+    "How many sides does a hexagon have?: ",
+    "What gas do humans need to breathe?: ",
+    "What is the capital city of New Zealand?: ",
+    "Which animal is known as the King of the Jungle?: ",
+    "How many days are there in a leap year?: ",
+    "What is the fastest land animal?: ",
+    "Which sport uses a racket and a shuttlecock?: ",
+    "What is the largest planet in our Solar System?: "
+)
+
+options = (
+    ("A. England", "B. Spain", "C. Argentina"),
+    ("A. Inland taipan", "B. Python", "C. Green Anaconda"),
+    ("A. 1", "B. 2", "C. 3"),
+    ("A. River Thames", "B. Nile River", "C. Amazon River"),
+    ("A. Mars", "B. Venus", "C. Jupiter"),
+    ("A. 7", "B. 11", "C. 15"),
+    ("A. Elephant", "B. Blue whale", "C. Giraffe"),
+    ("A. 5", "B. 6", "C. 8"),
+    ("A. Oxygen", "B. Carbon dioxide", "C. Helium"),
+    ("A. Auckland", "B. Wellington", "C. Christchurch"),
+    ("A. Lion", "B. Tiger", "C. Bear"),
+    ("A. 365", "B. 366", "C. 364"),
+    ("A. Cheetah", "B. Lion", "C. Horse"),
+    ("A. Tennis", "B. Badminton", "C. Rugby"),
+    ("A. Earth", "B. Saturn", "C. Jupiter")
+)
+
+answers = (
+    "B", "A", "C", "C", "A", "B", "B", "B", "A", "B", "A", "B", "A", "B", "C"
+)
+
+while True: # Keeps the quiz running so it can restart if the player gets an answer wrong
+    guesses = []# Creates an empty list to store the player's answers
+    score = 0   # Starts the player's score at 0
+    question_num = 0  # Starts the question number at 0
+    game_over = False # Keeps track of whether the player got an answer wrong
+
+    print() # Prints an empty line to make the quiz look cleaner
+    print("=======================================")# Prints a line to make the quiz look organised
+    print("             QUIZ STARTING")# Displays the quiz starting message
+    print("=======================================")# Prints another line
+    
+    # Goes through every question
+    for question in questions:# Goes through each question one at a time
+        print("---------------------------------------")# Prints a line before each question
+        print(question) # Displays the current question
+        
+        # Displays the answer options
+        for option in options[question_num]:# Gets the options for the current question
+            print(option) # Prints each answer option
+            
+        # Gets the player's answer
+        guess = input("Enter (A, B, C): ").upper()# Asks the player for an answer,.upper() changes lowercase letters into uppercase
+
+        # Checks that the player entered A, B, or C
+        while guess not in ("A", "B", "C"):# Keeps asking if the player enters something other than A, B, or C
+            print("Please enter A, B, or C.")
+            # Tells the player what they need to enter
+        guess = input("Enter (A, B, C): ").upper()# Asks the player for their answer again
+
+
+        # Saves the player's answer
+        guesses.append(guess)# Adds the player's answer to the guesses list
+
+        # Checks if the answer is correct
+        if guess == answers[question_num]:# Checks if the player's answer matches the correct answer
+
+            score += 1 # Adds 1 point to the player's score
+
+            print("Well done!")# Tells the player they got it correct
+            print("You can move to the next question.")# Tells the player they can continue
+        else:# Runs when the player's answer is wrong
+
+            print("Wrong!")# Tells the player their answer was incorrect
+
+            print() # Prints an empty line
+
+            print(f"{answers[question_num]} is the correct answer.")# Shows the correct answer
+            print("---------------------------------------") # Prints a line
+            print("You made a mistake!")# Tells the player they made a mistake
+            print("The quiz will now restart from the beginning.")# Tells the player the quiz will restart
+            print("---------------------------------------")# Prints another line
+
+            game_over = True# Changes game_over from False to True
+            break# Stops the for loop immediately
+        # Moves to the next question
+        question_num += 1 # Adds 1 to the question number
+    # If the player got an answer wrong
+    # restart the quiz
+    if game_over: # Checks if game_over is True
+        input("Press ENTER to restart the quiz...") # Waits for the player to press ENTER
+        continue# Goes back to the beginning of the while loop
+    # If the player gets every question correct
+    print()# Prints an empty line
+    print("---------------------------------------")# Prints a line
+    print("              QUIZ COMPLETE")# Displays the quiz complete message
+    print("---------------------------------------")# Prints another line
+    print("Correct answers:", end=" ") # Prints "Correct answers:" and stays on the same line
+
+    for answer in answers:# Goes through every correct answer
+        print(answer, end=" ") # Prints each correct answer on the same line
+    print() # Moves to the next line
+    # Show the player's score
+    print("You got", score, "out of", len(questions), "correct!") # Shows how many questions the player got correct
+
+    # Calculate percentage
+    percentage = int(score / len(questions) * 100)# Calculates the player's score as a percentage,and int() removes any decimal places
+    print("Your score is:", percentage, "%")# Displays the player's percentage score
+    print("---------------------------------------")# Prints a line
+
+    # Give the player feedback
+    if percentage == 100:# Checks if the player got 100%
+        print("PERFECT SCORE! AMAZING!")# Displays a special message for a perfect score
+    elif percentage >= 80:# Checks if the score is 80% or higher
+        print("Great job!") # Displays a positive message
+    elif percentage >= 50: # Checks if the score is 50% or higher
+        print("Good effort!")# Displays a message for the player
+    else:# Runs if the score is below 50%
+        print("Keep practising!") # Encourages the player to keep practising
+    print("---------------------------------------")# Prints a line
+    print("Thanks for playing,", name + "!")# Thanks the player and uses their name
+    print("---------------------------------------") # Prints another line
+    # End the game
+    break
+    # Stops the while loop and ends the quiz
